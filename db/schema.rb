@@ -23,4 +23,9 @@ ActiveRecord::Schema.define(version: 20151122213955) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "niggaplease", id: false, force: :cascade do |t|
+    t.integer "ey"
+    t.float   "lmao"
+  end
+
 end
