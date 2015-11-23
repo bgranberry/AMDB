@@ -25,6 +25,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 
+gem 'angular-rails-templates'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
