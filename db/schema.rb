@@ -11,10 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151123000730) do
+ActiveRecord::Schema.define(version: 20151129204215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "anime_contributors", force: :cascade do |t|
+    t.integer  "contributor_id"
+    t.integer  "anime_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "anime_genres", force: :cascade do |t|
+    t.integer  "anime_id"
+    t.integer  "genre_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "anime_tags", force: :cascade do |t|
+    t.integer  "anime_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "animes", force: :cascade do |t|
     t.string   "name"
@@ -35,4 +56,22 @@ ActiveRecord::Schema.define(version: 20151123000730) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "genres", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "anime_contributors", "animes"
+  add_foreign_key "anime_contributors", "contributors"
+  add_foreign_key "anime_genres", "animes"
+  add_foreign_key "anime_genres", "genres"
+  add_foreign_key "anime_tags", "animes"
+  add_foreign_key "anime_tags", "tags"
 end

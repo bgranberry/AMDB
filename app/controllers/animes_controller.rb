@@ -1,6 +1,7 @@
 class AnimesController < ApplicationController
   def show
     @anime = Anime.find(params[:id])
+    # @anime = Anime.where(:name => params[:id])
   end
 
   def new
