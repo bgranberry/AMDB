@@ -9,6 +9,9 @@ Rails.application.routes.draw do
 
   resources :animes
   resources :contributors
+  resources :anime_contributors
+
+  #get '/' => 
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

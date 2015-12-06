@@ -1,0 +1,17 @@
+<%= form_for :anime_contributors, url: anime_contributors_path do |f| %>
+  <p>
+    <%= f.label :anime_id %><br>
+    <%= f.text_field :anime_id %>
+  </p>
+ 
+  <p>
+    <%= f.label :contributor_id %><br>
+    <%= f.text_field :contributor_id %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+
+<% end %>
