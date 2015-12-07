@@ -1,0 +1,2 @@
+module AnimeContributorsHelper
+end

@@ -7,10 +7,11 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root to: 'application#angular'
 
-  # resources :articles
-  # resources :shows
   resources :animes
   resources :contributors
+  resources :anime_contributors
+
+  #get '/' => 
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

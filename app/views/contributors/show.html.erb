@@ -1,7 +1,29 @@
 <p>
-  <strong>Contributor stuff:</strong>
+  <strong>Contributor info:</strong>
+  <br>
+  Name:
   <%= @contributor.name %>
+  <br>
+  Age:
   <%= @contributor.age %>
+  <br>
+  Birthplace:
   <%= @contributor.birthplace %>
-  <%= @contributor.trivia %>
+  <br>
+  InternalID:
+  <%= @contributor.id %>
+  <br>
+  <br>
+  
+
+Films:
+  <br>
+<% @anime_contributors.all.each do |a| %>
+  <%= Anime.where(:id => a.anime_id).first.name%>
+  <br>
+
+<%end%>
+
+
+
 </p>
