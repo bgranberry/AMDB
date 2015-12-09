@@ -1,0 +1,16 @@
+<%= form_for :anime_genres, url: anime_genres_path do |f| %>
+  <p>
+    <%= f.label :anime_id %><br>
+    <%= f.text_field :anime_id %>
+  </p>
+
+  <p>
+    <%= f.label :genre_id %><br>
+    <%= f.text_field :genre_id %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>

@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   resources :animes
   resources :contributors
   resources :anime_contributors
+  resources :genres
+  resources :tags
+  resources :anime_tags
+  resources :anime_genres
 
   #get '/' => 
 
