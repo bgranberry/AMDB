@@ -29,41 +29,47 @@
           <br>
           <div class="important_people">
 
-              <% @anime_contributors.where(:anime_id => @anime.id).each do |a| %>
-
               <%directors = []%>
               <%writers   = []%>
               <%producers = []%>
-              <% if AnimeContributor.where(:anime_id => a.anime_id, :role => "Director")%>
-                <%directors.append(Contributor.where(:id => (AnimeContributor.where(:anime_id => a.anime_id))))%>
-              <% elsif AnimeContributor.where(:anime_id => a.anime_id, :role => "Writer")%>
-                <%directors.append(Contributor.where(:id => (AnimeContributor.where(:anime_id => a.anime_id))))%>
-              <% elsif AnimeContributor.where(:anime_id => a.anime_id, :role => "Producer")%>
-                <%producers.append(Contributor.where(:id => (AnimeContributor.where(:anime_id => a.anime_id))))%>
-              <%end%>
+              <% @anime_contributors.where(:anime_id => @anime.id).each do |a| %>
 
-              Directors:
-              <%= directors.map {|i| i} %>
-              Writers:
-              <%= writers.each {|i| i.name} %>
-              Producers:
-              <%= producers.each {|i| i.name} %>
+              <% if a.role == "Director"%>
+                <%directors.append(Contributor.where(:id => (AnimeContributor.where(:anime_id => a.anime_id, :role => "Director").first.contributor_id)))%>
+              <% elsif a.role == "Writer"%>
+                <%writers.append(Contributor.where(:id => (AnimeContributor.where(:anime_id => a.anime_id, :role => "Writer").first.contributor_id)))%>
+              <% elsif a.role == "Producer"%>
+                <%producers.append(Contributor.where(:id => (AnimeContributor.where(:anime_id => a.anime_id, :role => "Producer").first.contributor_id)))%>
+              <%end%>
 
               <%end%>
 
 
+              Director(s):
+              <% directors.uniq.each do |i| %>
+                <a href=<%= "/contributors/"+ i.first.id.to_s %>>
+                  <%=i.first.name%>
+                <%end%>
+              </a>
+              <br>
+              
+              Writer(s):
+              
+              <% writers.uniq.each do |i| %>
+                <a href=<%= "/contributors/"+ i.first.id.to_s %>>
+                  <%=i.first.name%>
+                <%end%>
+              </a>
 
-              <!-- /
-              </a>
-              /
               <br>
-              /
+              
+              Producer(s):
+              <% producers.uniq.each do |i| %>
+                <a href=<%= "/contributors/"+ i.first.id.to_s %>>
+                 <%=i.first.name%>
+                <%end%>
               </a>
-              /
               <br>
-              /
-              </a>
-              / -->
           </div>
         </div>
       </div>
