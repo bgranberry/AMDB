@@ -69,6 +69,11 @@ ActiveRecord::Schema.define(version: 20151129204215) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "niggaplease", id: false, force: :cascade do |t|
+    t.integer "ey"
+    t.float   "lmao"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
