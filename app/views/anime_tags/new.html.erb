@@ -1,0 +1,16 @@
+<%= form_for :anime_tags, url: anime_tags_path do |f| %>
+  <p>
+    <%= f.label :anime_id %><br>
+    <%= f.text_field :anime_id %>
+  </p>
+
+  <p>
+    <%= f.label :tag_id %><br>
+    <%= f.text_field :tag_id %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>
