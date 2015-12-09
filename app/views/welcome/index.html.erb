@@ -17,7 +17,46 @@
         <div class="col-lg-4">
           <h2>Animes</h2>
             <table class="table table-stripe">
-              
+              <% @anime.all.each do |a| %>
+
+                <tr><td><a href= <%= "/animes/" + Anime.where(:id => a.id).first.id.to_s %> >
+                  <%= Anime.where(:id => a.id).first.name %>
+                </a></td></tr>
+
+              <%end%>
+            </table>
+            <br>
+            <h2>Contributors</h2>
+            <table class="table table-stripe">
+              <% @contributor.all.each do |a| %>
+
+                <tr><td><a href= <%= "/contributors/" + Contributor.where(:id => a.id).first.id.to_s %> >
+                  <%= Contributor.where(:id => a.id).first.name %>
+                </a></td></tr>
+
+              <%end%>
+            </table>
+            <br>
+            <h2>Genres</h2>
+            <table class="table table-stripe">
+              <% @genre.all.each do |a| %>
+
+                <tr><td><a href= <%= "/genres/" + Genre.where(:id => a.id).first.id.to_s %> >
+                  <%= Genre.where(:id => a.id).first.name %>
+                </a></td></tr>
+
+              <%end%>
+            </table>
+            <br>
+            <h2>Tags</h2>
+            <table class="table table-stripe">
+              <% @tag.all.each do |a| %>
+
+                <tr><td><a href= <%= "/tags/" + Tag.where(:id => a.id).first.id.to_s %> >
+                  <%= Tag.where(:id => a.id).first.name %>
+                </a></td></tr>
+
+              <%end%>
             </table>
         </div>
       </div>

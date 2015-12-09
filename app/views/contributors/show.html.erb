@@ -7,9 +7,6 @@
           </div>
           <div style="font-size: 90%">Age: <%= @contributor.age %></div>
           <div style="font-size: 90%">Birthplace:  <%= @contributor.birthplace %></div>
-          <div style="font-size: 90%">
-              Roles: Director, Writer, Actor
-          </div>
         </div>
       </div>
     </div>
@@ -21,9 +18,9 @@
             <table class="table table-stripe">
               <% @anime_contributors.all.each do |a| %>
 
-              <tr><td><a href=<%= "/animes/"+Anime.where(:id => a.anime_id).first.id.to_s %>>
+              <tr><td><a href=<%= "/animes/"+ Anime.where(:id => a.anime_id).first.id.to_s %>>
               <%= Anime.where(:id => a.anime_id).first.name %>
-              </a></td></tr>
+              </a> - <%= AnimeContributor.where(:anime_id => a.anime_id, :contributor_id => a.contributor_id).first.role %></td></tr>
 
               <%end%>
             </table>
