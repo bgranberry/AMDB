@@ -1,8 +1,97 @@
-<p>
-  <strong>Name:</strong>
-  <%= @anime.name %>
-  <%= @anime.runtime %>
-  <%= @anime.age_rating %>
-  <%= @anime.year %>
-  <%= @anime.description %>
-</p>
+<div class="jumbotron">
+      <div class="container">
+        <div class="col-md-6">
+          <%= image_tag "title_card.jpg", height: '300', width: '400', alt: 'no_title_card.png' %>
+          <br>
+          <div style="padding-top: 10px">Tags: 
+          	<% @anime_tags.all.each do |a| %>
+				/ <a  href= <%= "/tags/" + Tag.where(:id => a.tag_id).first.id.to_s %> >
+          			<%= Tag.where(:id => a.tag_id).first.name %>
+              	</a> /<%end%>
+          </div>
+        </div>
+        
+        <div class="col-md-6 title_info">
+        	<div style="font-size: 130%">
+        		<%= @anime.name %>
+        	</div>
+          <div style="font-size: 90%">Originally Aired: <%= @anime.air_date %></div>
+          <div>
+          <% @anime_genres.all.each do |a| %>
+				/ <a  href= <%= "/genres/" + Genre.where(:id => a.genre_id).first.id.to_s %> >
+          			<%= Genre.where(:id => a.genre_id).first.name %>
+              	</a> /<%end%>
+          </div>
+          <br>
+          <div class="synopsis">
+              <%= @anime.description %>
+          </div>
+          <br>
+          <div class="important_people">
+
+              <%directors = []%>
+              <%writers   = []%>
+              <%producers = []%>
+              <% @anime_contributors.where(:anime_id => @anime.id).each do |a| %>
+
+              <% if a.role == "Director"%>
+                <%directors.append(Contributor.where(:id => (AnimeContributor.where(:anime_id => a.anime_id, :role => "Director").first.contributor_id)))%>
+              <% elsif a.role == "Writer"%>
+                <%writers.append(Contributor.where(:id => (AnimeContributor.where(:anime_id => a.anime_id, :role => "Writer").first.contributor_id)))%>
+              <% elsif a.role == "Producer"%>
+                <%producers.append(Contributor.where(:id => (AnimeContributor.where(:anime_id => a.anime_id, :role => "Producer").first.contributor_id)))%>
+              <%end%>
+
+              <%end%>
+
+
+              Director(s):
+              <% directors.uniq.each do |i| %>
+                <a href=<%= "/contributors/"+ i.first.id.to_s %>>
+                  <%=i.first.name%>
+                <%end%>
+              </a>
+              <br>
+              
+              Writer(s):
+              
+              <% writers.uniq.each do |i| %>
+                <a href=<%= "/contributors/"+ i.first.id.to_s %>>
+                  <%=i.first.name%>
+                <%end%>
+              </a>
+
+              <br>
+              
+              Producer(s):
+              <% producers.uniq.each do |i| %>
+                <a href=<%= "/contributors/"+ i.first.id.to_s %>>
+                 <%=i.first.name%>
+                <%end%>
+              </a>
+              <br>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <h2>Cast</h2>
+            <table class="table table-stripe">
+              <% @anime_contributors.all.each do |a| %>
+
+              	<tr><td><a href= <%= "/contributors/" + Contributor.where(:id => a.contributor_id).first.id.to_s %> >
+              		<%= Contributor.where(:id => a.contributor_id).first.name %>
+              	</a> - <%= AnimeContributor.where(:contributor_id => a.contributor_id).first.role %></td></tr>
+
+              <%end%>
+            </table>
+        </div>
+      </div>
+
+      <hr>
+
+      
+    </div>

@@ -16,6 +16,6 @@ class AnimeContributorsController < ApplicationController
 
   private 
   def anime_contributor_params
-    params.require(:anime_contributors).permit(:contributor_id, :anime_id)
+    params.require(:anime_contributors).permit(:contributor_id, :anime_id, :role)
   end
 end

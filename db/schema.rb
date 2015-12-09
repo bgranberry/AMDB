@@ -49,6 +49,13 @@ ActiveRecord::Schema.define(version: 20151207012945) do
     t.string   "air_date"
   end
 
+  create_table "articles", force: :cascade do |t|
+    t.string   "title"
+    t.text     "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "contributors", force: :cascade do |t|
     t.string   "name"
     t.integer  "age"
@@ -62,6 +69,11 @@ ActiveRecord::Schema.define(version: 20151207012945) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "niggaplease", id: false, force: :cascade do |t|
+    t.integer "ey"
+    t.float   "lmao"
   end
 
   create_table "tags", force: :cascade do |t|

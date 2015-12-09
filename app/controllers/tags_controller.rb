@@ -1,6 +1,7 @@
 class TagsController < ApplicationController
   def show
     @tag = Tag.find(params[:id])
+    @anime_tags = AnimeTag.where(:tag_id => params[:id]).all
   end
 
   def new

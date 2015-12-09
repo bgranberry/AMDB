@@ -1,29 +1,33 @@
-<p>
-  <strong>Contributor info:</strong>
-  <br>
-  Name:
-  <%= @contributor.name %>
-  <br>
-  Age:
-  <%= @contributor.age %>
-  <br>
-  Birthplace:
-  <%= @contributor.birthplace %>
-  <br>
-  InternalID:
-  <%= @contributor.id %>
-  <br>
-  <br>
-  
+<div class="jumbotron">
+      <div class="container">
+        
+        <div class="col-md-6 title_info">
+          <div style="font-size: 130%">
+            <%= @contributor.name %>
+          </div>
+          <div style="font-size: 90%">Age: <%= @contributor.age %></div>
+          <div style="font-size: 90%">Birthplace:  <%= @contributor.birthplace %></div>
+        </div>
+      </div>
+    </div>
 
-Films:
-  <br>
-<% @anime_contributors.all.each do |a| %>
-  <%= Anime.where(:id => a.anime_id).first.name%>
-  <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <h2>Animes</h2>
+            <table class="table table-stripe">
+              <% @anime_contributors.all.each do |a| %>
 
-<%end%>
+              <tr><td><a href=<%= "/animes/"+ Anime.where(:id => a.anime_id).first.id.to_s %>>
+              <%= Anime.where(:id => a.anime_id).first.name %>
+              </a> - <%= AnimeContributor.where(:anime_id => a.anime_id, :contributor_id => a.contributor_id).first.role %></td></tr>
 
+              <%end%>
+            </table>
+        </div>
+      </div>
 
+      <hr>
 
-</p>
+      
+    </div>

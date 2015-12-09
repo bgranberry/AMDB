@@ -1,4 +1,31 @@
-<p>
-  <strong>Name:</strong>
-  <%= @tag.name %>
-</p>
+<div class="jumbotron">
+      <div class="container">
+        
+        <div class="col-md-6 title_info">
+          <div style="font-size: 130%">
+            Tag: <%= @tag.name %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <h2>Animes</h2>
+            <table class="table table-stripe">
+              <% @anime_tags.all.each do |a| %>
+
+              <tr><td><a href=<%= "/animes/"+Anime.where(:id => a.anime_id).first.id.to_s %>>
+              <%= Anime.where(:id => a.anime_id).first.name %>
+              </a></td></tr>
+
+              <%end%>
+            </table>
+        </div>
+      </div>
+
+      <hr>
+
+      
+    </div>

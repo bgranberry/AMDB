@@ -1,6 +1,9 @@
 class AnimesController < ApplicationController
   def show
     @anime = Anime.find(params[:id])
+    @anime_contributors = AnimeContributor.where(:anime_id => params[:id]).all
+    @anime_genres = AnimeGenre.where(:anime_id => params[:id]).all
+    @anime_tags = AnimeTag.where(:anime_id=> params[:id]).all
     # @anime = Anime.where(:name => params[:id])
   end
 
