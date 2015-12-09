@@ -28,28 +28,42 @@
           </div>
           <br>
           <div class="important_people">
-              Director(s): <% @anime_contributors.all.each do |a| %>
-              /
-              <a href=<%= "/contributors/"+ Contributor.where(:id => a.contributor_id).first.id.to_s %>>
-              <%= Contributor.where(:id => (AnimeContributor.where(:id => a.anime_id , :role => "Director").contributor_id)).first.name %>
+
+              <% @anime_contributors.where(:anime_id => @anime.id).each do |a| %>
+
+              <%directors = []%>
+              <%writers   = []%>
+              <%producers = []%>
+              <% if AnimeContributor.where(:anime_id => a.anime_id, :role => "Director")%>
+                <%directors.append(Contributor.where(:id => (AnimeContributor.where(:anime_id => a.anime_id))))%>
+              <% elsif AnimeContributor.where(:anime_id => a.anime_id, :role => "Writer")%>
+                <%directors.append(Contributor.where(:id => (AnimeContributor.where(:anime_id => a.anime_id))))%>
+              <% elsif AnimeContributor.where(:anime_id => a.anime_id, :role => "Producer")%>
+                <%producers.append(Contributor.where(:id => (AnimeContributor.where(:anime_id => a.anime_id))))%>
+              <%end%>
+
+              Directors:
+              <%= directors.map {|i| i} %>
+              Writers:
+              <%= writers.each {|i| i.name} %>
+              Producers:
+              <%= producers.each {|i| i.name} %>
+
+              <%end%>
+
+
+
+              <!-- /
               </a>
               /
-              <%end%>
               <br>
-              Writer(s): <% @anime_contributors.all.each do |a| %>
               /
-              <a href=<%= "/contributors/"+ Contributor.where(:id => a.contributor_id).first.id.to_s %>>
-              <%= AnimeContributor.where(:id => a.anime_id , :role => "Writer").first.name %>
               </a>
               /
-              <%end%>
-              Producer(s): <% @anime_contributors.all.each do |a| %>
+              <br>
               /
-              <a href=<%= "/contributors/"+ Contributor.where(:id => a.contributor_id).first.id.to_s %>>
-              <%= AnimeContributor.where(:id => a.anime_id , :role => "Producer").first.name %>
               </a>
-              /
-              <%end%>
+              / -->
           </div>
         </div>
       </div>
@@ -64,7 +78,7 @@
 
               	<tr><td><a href= <%= "/contributors/" + Contributor.where(:id => a.contributor_id).first.id.to_s %> >
               		<%= Contributor.where(:id => a.contributor_id).first.name %>
-              	</a> - <%= AnimeContributor.where(:id => a.contributor_id).first.role %></td></tr>
+              	</a> - <%= AnimeContributor.where(:contributor_id => a.contributor_id).first.role %></td></tr>
 
               <%end%>
             </table>
