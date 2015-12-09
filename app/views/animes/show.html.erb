@@ -3,24 +3,53 @@
         <div class="col-md-6">
           <%= image_tag "title_card.jpg", height: '300', width: '400', alt: 'no_title_card.png' %>
           <br>
-          <div style="padding-top: 10px">Tags: <a>Robots</a>, <a>Space</a>, <a>Gundam</a>, <a>Politics</a>, <a>Futuristic</a></div>
+          <div style="padding-top: 10px">Tags: 
+          	<% @anime_tags.all.each do |a| %>
+				/ <a  href= <%= "/tags/" + Tag.where(:id => a.tag_id).first.id.to_s %> >
+          			<%= Tag.where(:id => a.tag_id).first.name %>
+              	</a> /<%end%>
+          </div>
         </div>
         
         <div class="col-md-6 title_info">
         	<div style="font-size: 130%">
         		<%= @anime.name %>
         	</div>
-          <div style="font-size: 90%">Originally Aired: (PLACEHOLDER)</div>
-          <div><a>Mecha</a>, <a>Action</a>, <a>Adventure</a></div>
+          <div style="font-size: 90%">Originally Aired: <%= @anime.air_date %></div>
+          <div>
+          <% @anime_genres.all.each do |a| %>
+				/ <a  href= <%= "/genres/" + Genre.where(:id => a.genre_id).first.id.to_s %> >
+          			<%= Genre.where(:id => a.genre_id).first.name %>
+              	</a> /<%end%>
+          </div>
           <br>
           <div class="synopsis">
               <%= @anime.description %>
           </div>
           <br>
           <div class="important_people">
-              Director(s): <a>Masashi Ikeda</a>
+              Director(s): <% @anime_contributors.all.each do |a| %>
+              /
+              <a href=<%= "/contributors/"+ Contributor.where(:id => a.contributor_id).first.id.to_s %>>
+              <%= Contributor.where(:id => (AnimeContributor.where(:id => a.anime_id , :role => "Director").contributor_id)).first.name %>
+              </a>
+              /
+              <%end%>
               <br>
-              Writer(s): <a>Katsuyuki Sumizawa</a>
+              Writer(s): <% @anime_contributors.all.each do |a| %>
+              /
+              <a href=<%= "/contributors/"+ Contributor.where(:id => a.contributor_id).first.id.to_s %>>
+              <%= AnimeContributor.where(:id => a.anime_id , :role => "Writer").first.name %>
+              </a>
+              /
+              <%end%>
+              Producer(s): <% @anime_contributors.all.each do |a| %>
+              /
+              <a href=<%= "/contributors/"+ Contributor.where(:id => a.contributor_id).first.id.to_s %>>
+              <%= AnimeContributor.where(:id => a.anime_id , :role => "Producer").first.name %>
+              </a>
+              /
+              <%end%>
           </div>
         </div>
       </div>
@@ -35,7 +64,7 @@
 
               	<tr><td><a href= <%= "/contributors/" + Contributor.where(:id => a.contributor_id).first.id.to_s %> >
               		<%= Contributor.where(:id => a.contributor_id).first.name %>
-              	</a></td></tr>
+              	</a> - <%= AnimeContributor.where(:id => a.contributor_id).first.role %></td></tr>
 
               <%end%>
             </table>

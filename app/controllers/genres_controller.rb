@@ -2,6 +2,7 @@ class GenresController < ApplicationController
 
   def show
     @genre = Genre.find(params[:id])
+    @anime_genres = AnimeGenre.where(:genre_id => params[:id]).all
   end
 
   def new
